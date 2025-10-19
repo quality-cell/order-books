@@ -8,6 +8,7 @@
 5. Выполните mvn clean package
 6. Выполните java -jar order-books-1.0.jar 
 7. Переходим на главную страницу http://localhost:8080/
+8. Чтобы получить json со список заказов по клиентам http://localhost:8080/book-order/by-client
 
 # Функционал:
 
