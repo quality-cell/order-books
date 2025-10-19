@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить клиента</title>
+</head>
+<body>
+<h1>Добавить нового клиента</h1>
+
+<form th:action="@{/client}" th:object="${client}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Фамилия: <input type="text" th:field="*{surname}" required /></label><br/><br/>
+    <label>Имя: <input type="text" th:field="*{firstName}" required /></label><br/><br/>
+    <label>Отчество: <input type="text" th:field="*{patronymic}" /></label><br/><br/>
+    <label>Дата рождения: <input type="date" th:field="*{birthday}" required /></label><br/><br/>
+
+    <button type="submit">Сохранить</button>
+    <a th:href="@{/client}">Отмена</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать выдачу</title>
+</head>
+<body>
+<h1>Редактировать выдачу книги</h1>
+
+<form th:action="@{/book-order}" th:object="${order}" method="post">
+  <input type="hidden" name="_method" value="put" />
+
+  <input type="hidden" th:field="*{id}" />
+
+  <label>Клиент:
+    <select th:field="*{client.id}" required>
+      <option value="">-- Выберите клиента --</option>
+      <option th:each="c : ${clients}"
+              th:value="${c.id}"
+              th:text="${c.fullName}"
+              th:selected="${c.id == order.client.id}">Иванов И.И.</option>
+    </select>
+  </label><br/><br/>
+
+  <label>Книга:
+    <select th:field="*{book.id}" required>
+      <option value="">-- Выберите книгу --</option>
+      <option th:each="b : ${books}"
+              th:value="${b.id}"
+              th:text="${b.title + ' (' + b.author + ')'}"
+              th:selected="${b.id == order.book.id}">Война и мир (Толстой)</option>
+    </select>
+  </label><br/><br/>
+
+  <label>Дата выдачи: <input type="date" th:field="*{dateBegin}" required /></label><br/><br/>
+  <label>Дата возврата: <input type="date" th:field="*{dateEnd}" required /></label><br/><br/>
+
+  <button type="submit">Сохранить изменения</button>
+  <a th:href="@{/book-order}">Отмена</a>
+</form>
+</body>
+</html>

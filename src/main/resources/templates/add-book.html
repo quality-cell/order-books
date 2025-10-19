@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить книгу</title>
+</head>
+<body>
+<h2>Добавить новую книгу</h2>
+
+<form th:action="@{/book}" method="post" th:object="${book}">
+    <label>Автор: <input type="text" th:field="*{author}" required /></label><br/><br/>
+    <label>Название: <input type="text" th:field="*{title}" required /></label><br/><br/>
+    <label>ISBN: <input type="text" th:field="*{isbn}" required /></label><br/><br/>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<a th:href="@{/book}">Назад к списку книг</a>
+</body>
+</html>

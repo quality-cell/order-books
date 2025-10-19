@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Список клиентов</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 20px; }
+    .table-container { margin-top: 20px; }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container">
+  <h1 class="mb-4">👥 Список клиентов</h1>
+
+  <div th:replace="message :: error-alert"></div>
+  <div th:replace="message :: success-alert"></div>
+
+  <a th:href="@{/client/new}" class="btn btn-primary mb-3">➕ Добавить клиента</a>
+
+  <div class="table-container">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Дата рождения</th>
+        <th scope="col">Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${clients.empty}">
+        <td colspan="4" class="text-center text-muted">Нет клиентов</td>
+      </tr>
+
+      <tr th:each="client : ${clients}">
+        <td th:text="${client.id}">1</td>
+        <td th:text="${client.fullName}">Иванов И.И.</td>
+        <td th:text="${#temporals.format(client.birthday, 'dd.MM.yyyy')}">01.01.1990</td>
+        <td>
+          <a th:href="@{/client/edit/{id}(id=${client.id})}"
+             class="btn btn-sm btn-outline-warning me-1">✏️ Редактировать</a>
+
+          <form th:action="@{/client/{clientId}(clientId=${client.id})}"
+                method="post"
+                class="d-inline"
+                onsubmit="return confirm('Вы уверены, что хотите удалить клиента «' + this.getAttribute('data-title') + '»?');"
+                th:attr="data-title=${client.fullName}">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Удалить</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a th:href="@{/}">Назад на главную страницу</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="error-alert" th:if="${errorMessage != null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Ошибка!</strong> <span th:text="${errorMessage}">Описание ошибки</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+</div>
+
+<div th:fragment="success-alert" th:if="${successMessage != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Готово!</strong> <span th:text="${successMessage}">Операция выполнена</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+</div>
+
+</body>
+</html>

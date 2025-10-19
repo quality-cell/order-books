@@ -1,0 +1,9 @@
+services:
+  pg_db:
+    image: postgres:14.9
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=OrderBooks
+    ports:
+      - "5432:5432"

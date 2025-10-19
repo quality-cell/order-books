@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека — Главная</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .menu a {
+            display: block;
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .menu a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<h1>📚 Система управления библиотекой</h1>
+
+<div class="menu">
+    <a th:href="@{/client}">👥 Список клиентов</a>
+    <a th:href="@{/book}">📖 Список книг</a>
+    <a th:href="@{/book-order}">📋 Список выданных книг</a>
+    <a th:href="@{/book-order/new}">➕ Выдать книгу (новый заказ)</a>
+</div>
+</body>
+</html>
