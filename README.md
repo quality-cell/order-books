@@ -3,7 +3,7 @@
 # Для запуска проекта необходимо:
 
 1. Установить Dcoker на свой компьютер, если он еще не установлен
-2. Клонировать проект из репозитория с помощью команды git clone https://github.com/quality-cell/FilteringStudents.git
+2. Клонировать проект из репозитория с помощью команды git clone https://github.com/quality-cell/order-books.git
 3. Запустите Docker и запустите docker-compose.yml файл
 5. Выполните mvn clean package
 6. Выполните java -jar order-books-1.0.jar 
