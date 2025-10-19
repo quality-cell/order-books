@@ -6,7 +6,9 @@ import org.example.dto.BookOrderDto;
 import org.example.dto.ClientDto;
 import org.example.dto.ClientWithBookOrderDto;
 import org.example.entity.BookOrder;
+import org.example.entity.Client;
 import org.example.mapper.BookOrderMapper;
+import org.example.mapper.ClientMapper;
 import org.example.repository.BookOrderRepository;
 import org.example.repository.BookRepository;
 import org.example.repository.ClientRepository;
@@ -26,6 +28,7 @@ public class BookOrderService {
     private final ClientRepository clientRepository;
 
     private final BookOrderMapper bookOrderMapper;
+    private final ClientMapper clientMapper;
 
     public BookOrderDto addBookOrder(BookOrderDto dto) {
         validateBookOrder(dto);
@@ -47,16 +50,17 @@ public class BookOrderService {
             return null;
         }
 
-        List<BookOrderDto> bookOrderDtos = bookOrderMapper.toDtoList(bookOrders);
-
-        Map<ClientDto, List<BookOrderDto>> bookOrderByClient = bookOrderDtos.stream()
-                .collect(Collectors.groupingBy(BookOrderDto::getClient));
+        Map<Client, List<BookOrder>> bookOrderByClient = bookOrders.stream()
+                .collect(Collectors.groupingBy(BookOrder::getClient));
 
         return bookOrderByClient.entrySet().stream()
                 .map(entry -> {
                     ClientWithBookOrderDto clientWithBookOrderDto = new ClientWithBookOrderDto();
-                    clientWithBookOrderDto.setClient(entry.getKey());
-                    clientWithBookOrderDto.setBookOrders(entry.getValue());
+                    ClientDto clientDto = clientMapper.toDto(entry.getKey());
+                    clientWithBookOrderDto.setClient(clientDto);
+
+                    List<BookOrderDto> dtoListWithIgnoreClient = bookOrderMapper.toDtoListWithIgnoreClient(entry.getValue());
+                    clientWithBookOrderDto.setBookOrders(dtoListWithIgnoreClient);
 
                     return clientWithBookOrderDto;
                 })
