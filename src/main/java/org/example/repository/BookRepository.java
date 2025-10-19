@@ -60,6 +60,7 @@ public class BookRepository {
         return query.getSingleResult();
     }
 
+    @Transactional
     public void deleteBookById(Long bookId) {
         Query query = em.createQuery("delete from Book b where b.id = :bookId");
         query.setParameter("bookId", bookId);
