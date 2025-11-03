@@ -26,17 +26,17 @@ public class BookService {
 
         Book book = bookMapper.toEntity(dto);
 
-        return bookMapper.toDto(bookRepository.addBook(book));
+        return bookMapper.toDto(bookRepository.save(book));
     }
 
     public List<BookDto> getAllBooks() {
-        List<Book> books = bookRepository.getAllBooks();
+        List<Book> books = bookRepository.findAll();
 
         return bookMapper.toDtoList(books);
     }
 
     public BookDto getBookById(Long bookId) {
-        Book book = bookRepository.getBookById(bookId);
+        Book book = bookRepository.findById(bookId).orElse(null);
 
         return bookMapper.toDto(book);
     }
@@ -52,7 +52,7 @@ public class BookService {
 
         Book book = bookMapper.toEntity(dto);
 
-        return bookMapper.toDto(bookRepository.updateBook(book));
+        return bookMapper.toDto(bookRepository.save(book));
     }
 
     public void deleteBookById(Long bookId) {
@@ -60,6 +60,6 @@ public class BookService {
             throw new RuntimeException("Не указа id книги");
         }
 
-        bookRepository.deleteBookById(bookId);
+        bookRepository.deleteById(bookId);
     }
 }

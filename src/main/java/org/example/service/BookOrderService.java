@@ -39,13 +39,13 @@ public class BookOrderService {
     }
 
     public List<BookOrderDto> getAllBookOrders() {
-        List<BookOrder> bookOrders = bookOrderRepository.findAll();
+        List<BookOrder> bookOrders = bookOrderRepository.getAll();
 
         return bookOrderMapper.toDtoList(bookOrders);
     }
 
     public List<ClientWithBookOrderDto> getBookOrdersByClient() {
-        List<BookOrder> bookOrders = bookOrderRepository.findAll();
+        List<BookOrder> bookOrders = bookOrderRepository.getAll();
         if (bookOrders.isEmpty()) {
             return null;
         }
@@ -68,7 +68,7 @@ public class BookOrderService {
     }
 
     public BookOrderDto getBookOrderById(Long bookOrderId) {
-        BookOrder bookOrder = bookOrderRepository.findById(bookOrderId).orElse(null);
+        BookOrder bookOrder = bookOrderRepository.getBookOrderById(bookOrderId);
 
         return bookOrderMapper.toDto(bookOrder);
     }
@@ -126,7 +126,7 @@ public class BookOrderService {
             throw new RuntimeException("Дата возврата не может быть раньше даты взятия книги");
         }
 
-        if (!bookRepository.exitsBookById(bookId)) {
+        if (!bookRepository.existsById(bookId)) {
             throw new RuntimeException("Книги с id = " + bookId + " не существует");
         }
 
