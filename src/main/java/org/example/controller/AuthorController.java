@@ -2,7 +2,6 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.AuthorDto;
-import org.example.dto.ClientDto;
 import org.example.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
