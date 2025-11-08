@@ -9,7 +9,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {BookOrderMapper.class, ClientMapper.class})
+@Mapper(componentModel = "spring", uses = {BookMapper.class, ClientMapper.class})
 public interface BookOrderMapper {
     BookOrderDto toDto(BookOrder entity);
     BookOrder toEntity(BookOrderDto dto);

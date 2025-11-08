@@ -10,12 +10,12 @@ import java.util.List;
 
 @Repository
 public interface BookOrderRepository extends JpaRepository<BookOrder, Long> {
-    @EntityGraph(attributePaths = {"book", "client"})
+    @EntityGraph(attributePaths = {"book.author", "client"})
     @Query("select bo from BookOrder bo")
     List<BookOrder> getAll();
 
-    @EntityGraph(attributePaths = {"book", "client"})
+    @EntityGraph(attributePaths = {"book.author", "client"})
     @Query("select bo from BookOrder bo " +
-            "where bo.id = :id")
-    BookOrder getBookOrderById(Long id);
+            "where bo.id = :bookOrderId")
+    BookOrder getBookOrderById(Long bookOrderId);
 }
