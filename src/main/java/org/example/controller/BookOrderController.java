@@ -24,7 +24,7 @@ public class BookOrderController {
         model.addAttribute("clients", clientService.getAllClients());
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "add-book-order";
+        return "book-order/add-book-order";
     }
 
     @PostMapping
@@ -44,7 +44,7 @@ public class BookOrderController {
     public String getAllBookOrders(Model model) {
         model.addAttribute("orders", bookOrderService.getAllBookOrders());
 
-        return "book-orders";
+        return "book-order/book-orders";
     }
 
     @GetMapping("/edit/{bookOrderId}")
@@ -55,7 +55,7 @@ public class BookOrderController {
         model.addAttribute("clients", clientService.getAllClients());
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "edit-book-order";
+        return "book-order/edit-book-order";
     }
 
     @PutMapping

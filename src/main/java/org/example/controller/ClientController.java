@@ -31,14 +31,14 @@ public class ClientController {
     public String getAllClients(Model model) {
         model.addAttribute("clients", clientService.getAllClients());
 
-        return "clients";
+        return "client/clients";
     }
 
     @GetMapping("/new")
     public String getAddClientForm(Model model) {
         model.addAttribute("client", new ClientDto());
 
-        return "add-client";
+        return "client/add-client";
     }
 
     @GetMapping("/edit/{clientId}")
@@ -47,7 +47,7 @@ public class ClientController {
 
         model.addAttribute("client", dto);
 
-        return "edit-client";
+        return "client/edit-client";
     }
 
     @PutMapping

@@ -27,7 +27,7 @@
       <option value="">-- Выберите книгу --</option>
       <option th:each="b : ${books}"
               th:value="${b.id}"
-              th:text="${b.title + ' (' + b.author + ')'}"
+              th:text="${b.title + ' (' + b.author.fullName + ')'}"
               th:selected="${b.id == order.book.id}">Война и мир (Толстой)</option>
     </select>
   </label><br/><br/>

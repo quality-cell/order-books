@@ -32,8 +32,8 @@ public class ClientService {
         return clientMapper.toDtoList(clientRepository.findAll());
     }
 
-    public ClientDto getClientById(Long id) {
-        Client client = clientRepository.findById(id).orElse(null);
+    public ClientDto getClientById(Long clientId) {
+        Client client = clientRepository.findById(clientId).orElse(null);
 
         return clientMapper.toDto(client);
     }

@@ -13,7 +13,14 @@
 
     <label>Название: <input type="text" th:field="*{title}" required /></label><br/><br/>
 
-    <label>Автор: <input type="text" th:field="*{author}" required /></label><br/><br/>
+    <label>Автор:
+        <select th:field="*{author.id}" required>
+            <option value="">-- Выберите автора --</option>
+            <option th:each="a : ${authors}"
+                    th:value="${a.id}"
+                    th:text="${a.fullName}">Иванов И.И.</option>
+        </select>
+    </label><br/><br/>
 
     <label>ISBN: <input type="text" th:field="*{isbn}" required /></label><br/><br/>
 

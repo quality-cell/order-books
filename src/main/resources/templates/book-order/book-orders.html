@@ -40,7 +40,7 @@
       <tr th:each="order : ${orders}">
         <td th:text="${order.id}">1</td>
         <td th:text="${order.client.fullName}">Иванов И.И.</td>
-        <td th:text="${order.book.title + ' (' + order.book.author + ')'}">Война и мир (Лев Толстой)</td>
+        <td th:text="${order.book.title + ' (' + order.book.author.fullName + ')'}">Война и мир (Лев Толстой)</td>
         <td th:text="${#temporals.format(order.dateBegin, 'dd.MM.yyyy')}">01.10.2025</td>
         <td th:text="${#temporals.format(order.dateEnd, 'dd.MM.yyyy')}">15.10.2025</td>
         <td>
