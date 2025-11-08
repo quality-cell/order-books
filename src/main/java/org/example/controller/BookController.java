@@ -3,6 +3,7 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.BookDto;
+import org.example.service.AuthorService;
 import org.example.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final AuthorService authorService;
 
     @PostMapping
     public String addBook(@ModelAttribute BookDto dto, RedirectAttributes redirectAttributes) {
@@ -32,14 +34,15 @@ public class BookController {
     public String getAllBooks(Model model) {
         model.addAttribute("books", bookService.getAllBooks());
 
-        return "books";
+        return "book/books";
     }
 
     @GetMapping("/new")
     public String getAddBookForm(Model model) {
         model.addAttribute("book", new BookDto());
+        model.addAttribute("authors", authorService.getAllAuthors());
 
-        return "add-book";
+        return "book/add-book";
     }
 
     @GetMapping("/edit/{bookId}")
@@ -47,8 +50,9 @@ public class BookController {
         BookDto dto = bookService.getBookById(bookId);
 
         model.addAttribute("book", dto);
+        model.addAttribute("authors", authorService.getAllAuthors());
 
-        return "edit-book";
+        return "book/edit-book";
     }
 
     @PutMapping

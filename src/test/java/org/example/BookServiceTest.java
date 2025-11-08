@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.dto.AuthorDto;
 import org.example.dto.BookDto;
 import org.example.dto.BookOrderDto;
 import org.example.service.BookOrderService;
@@ -44,9 +45,12 @@ public class BookServiceTest {
 
     @Test
     public void addBook() {
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(1L);
+
         BookDto bookDto = new BookDto();
         bookDto.setTitle("Война и мир");
-        bookDto.setAuthor("Толстой Лев Николаевич");
+        bookDto.setAuthor(authorDto);
         bookDto.setIsbn("123456789");
 
         BookDto result = bookService.addBook(bookDto);
@@ -55,13 +59,16 @@ public class BookServiceTest {
         assertNotNull(result.getId());
         assertEquals(bookDto.getIsbn(), result.getIsbn());
         assertEquals(bookDto.getTitle(), result.getTitle());
-        assertEquals(bookDto.getAuthor(), result.getAuthor());
+        assertEquals(bookDto.getAuthor().getId(), result.getAuthor().getId());
     }
 
     @Test
     public void addBookWithNullParams() {
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(1L);
+
         BookDto nullTitle = new BookDto();
-        nullTitle.setAuthor("Толстой Лев Николаевич");
+        nullTitle.setAuthor(authorDto);
         nullTitle.setIsbn("123456789");
 
         ConstraintViolationException exceptionNullTitle = assertThrows(ConstraintViolationException.class, () -> bookService.addBook(nullTitle));
@@ -76,14 +83,14 @@ public class BookServiceTest {
 
         BookDto nullIsbn = new BookDto();
         nullIsbn.setTitle("Война и мир");
-        nullIsbn.setAuthor("Толстой Лев Николаевич");
+        nullIsbn.setAuthor(authorDto);
 
         ConstraintViolationException exceptionNullIsbn = assertThrows(ConstraintViolationException.class, () -> bookService.addBook(nullIsbn));
         assertNotNull(exceptionNullIsbn.getMessage());
 
         BookDto dto = new BookDto();
         dto.setTitle("Война и мир");
-        dto.setAuthor("Толстой Лев Николаевич");
+        dto.setAuthor(authorDto);
         dto.setIsbn("1234567890000000000000");
 
         ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> bookService.addBook(dto));

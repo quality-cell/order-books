@@ -11,8 +11,8 @@ import static org.example.service.UtilsService.getFullName;
 @Getter
 @Setter
 @Entity
-@Table(schema = "public", name = "client")
-public class Client {
+@Table(schema = "public", name = "author")
+public class Author {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

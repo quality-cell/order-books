@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.BookDto;
 import org.example.entity.Book;
 import org.example.mapper.BookMapper;
+import org.example.repository.AuthorRepository;
 import org.example.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
 
     private final BookMapper bookMapper;
 
@@ -24,19 +26,28 @@ public class BookService {
             throw new RuntimeException("Не переданы данные для добавления книги");
         }
 
+        Long authorId = dto.getAuthor().getId();
+        if (authorId == null) {
+            throw new RuntimeException("Не указан id автора");
+        }
+
+        if (!authorRepository.existsById(authorId)) {
+            throw new RuntimeException("Автор с id " + authorId + " не существует");
+        }
+
         Book book = bookMapper.toEntity(dto);
 
         return bookMapper.toDto(bookRepository.save(book));
     }
 
     public List<BookDto> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
+        List<Book> books = bookRepository.getAllBooks();
 
         return bookMapper.toDtoList(books);
     }
 
     public BookDto getBookById(Long bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
+        Book book = bookRepository.getBookById(bookId);
 
         return bookMapper.toDto(book);
     }

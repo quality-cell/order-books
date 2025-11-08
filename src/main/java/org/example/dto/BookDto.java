@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter
@@ -14,8 +15,8 @@ public class BookDto {
     @NotEmpty(message = "Не указано название книги")
     private String title;
 
-    @NotEmpty(message = "Не указан автор книги")
-    private String author;
+    @NotNull(message = "Не указан автор книги")
+    private AuthorDto author;
 
     @NotEmpty(message = "Не указан ISBN книги")
     @Length(max = 17, message = "Слишком длинный ISBN")
